@@ -1,7 +1,7 @@
 package org.example;
 
+import org.junit.Assert;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 /**
@@ -18,3 +18,7 @@ public class AppTest
         assertTrue( true );
     }
 }
+
+//    {Assert.assertTrue( true );}
+
+
