@@ -11,6 +11,11 @@ public class Triangle {
         this.c = c;
     }
 
+    public float getAreaOfTriangle() {
+        float p = (a + b + c) / 2f;
+        return (float) Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    }
+
     public boolean triangleIsImpossible (int a, int b, int c) {
         return (a + b <= c || a + c <= b || b + c <= a);
     }
@@ -40,14 +45,13 @@ public class Triangle {
                 System.out.println("Такой треугольник невозможен");
             }
             else {
-                float p = (a + b + c) / 2f;
-                float s = (float) Math.sqrt(p * (p - a) * (p - b) * (p - c));
-                System.out.println("Площадь этого треугольника: " + s);
+                triangle.getAreaOfTriangle();
+                System.out.println("Площадь этого треугольника: " + triangle.getAreaOfTriangle());
             }
 
             System.out.println("\nИзменим длины сторон?\n клавиша 1 - ДА\n любая другая цифра - НЕТ");
             int repeat = in.nextInt();
-//------------------------------------------------------
+
             if (triangle.repeatAction(repeat)) {
                 System.out.println("Начинаем заново...");
             }
@@ -55,8 +59,6 @@ public class Triangle {
                 System.out.println("       Пока-пока!");
                 return;
             }
-//======================================================
         } while (true);
     }
-
 }
