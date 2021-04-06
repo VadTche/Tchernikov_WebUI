@@ -1,14 +1,13 @@
 package TriangleTest;
 
-import com.google.common.base.Functions;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.junit.Assert;
-import org.junit.Test;
 
 import java.util.Scanner;
 
@@ -34,7 +33,6 @@ public class TriangleTest {
     float p = (a + b + c) / 2f;
     return (float) Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
-
 //--------------------------------------------------------------
     @Test
     public void isImpossibleTrue() {
