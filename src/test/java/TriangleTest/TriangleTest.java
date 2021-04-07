@@ -1,11 +1,8 @@
 package TriangleTest;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +19,6 @@ public class TriangleTest {
     }
 
     private static final Logger logger = LoggerFactory.getLogger(TriangleTest.class);
-    Functions functions = new Functions();
 
     @BeforeAll
     static void beforeAllTests() {
@@ -58,7 +54,7 @@ public class TriangleTest {
         return repeat == 1;
     }
 //---------------------------------------------------------------
-    public static void main(String[] args) {
+    public void startTest () {
 
         System.out.println("===================================================");
         System.out.println("Вычисляем площадь треугольника по длинам его сторон");
