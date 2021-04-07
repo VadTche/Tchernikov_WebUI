@@ -25,7 +25,7 @@ public class TriangleTest {
         Assertions.assertEquals(correctT.getAreaOfTriangle(), s);
     }
 
-    @Test
+    @Test //при этих двух проверках метода boolean не смог избавиться от обязательного ввода параметров, как это сделать?
     public void isImpossibleTrue() {
         Assertions.assertTrue(wrongT.triangleIsImpossible(3, 4, 7));
     }
