@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,18 +31,26 @@ public class CRM1 {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
+    static Actions builder = new Actions(driver);
+
     public static void main(String[] args) {
         login();
 
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
-        driver.findElement(By.xpath(
-                ".//li[@class='dropdown']/a[@class='unclickable']" +
-                        "/span[text()='Проекты']")).click();
 
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@class='title' and text()='Мои проекты']")));
-        driver.findElement(By.xpath(".//*[@class='title' and text()='Мои проекты']")).click();
+
+
+        new WebDriverWait(driver, 7)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
+
+        builder.moveToElement(driver.findElement((By.xpath(
+                ".//li[@class='dropdown']/a[@class='unclickable']" +
+                        "/span[text()='Проекты']"))))
+                .moveToElement(driver.findElement(By.xpath(".//*[@class='title' and text()='Мои проекты']")))
+                .click()
+                .build()
+                .perform();
 
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать проект")));
