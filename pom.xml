@@ -17,6 +17,9 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <!--dependencies versions-->
+
+
+
     <selenium-java.version>3.141.59</selenium-java.version>
     <webdrivermanager.version>3.8.1</webdrivermanager.version>
   </properties>
