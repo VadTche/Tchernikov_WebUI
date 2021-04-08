@@ -1,7 +1,6 @@
-package CRM1Test;
+package Lesson5CRM1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class crm1Test {
+public class CRM1 {
     private static final String LOGIN_PAGE_URL = "https://crm.geekbrains.space/user/login";
     private static final String STUDENT_LOGIN = "Applanatest";
     private static final String STUDENT_PASSWORD = "Student2020!";
@@ -32,8 +31,8 @@ public class crm1Test {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
-    @Test
-    public void commonWaiterResult () {
+    public static void main(String[] args) {
+        
         login();
 
         new WebDriverWait(driver, 7)
