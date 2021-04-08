@@ -40,11 +40,13 @@ public class Collectomania {
     public static void main(String[] args) throws InterruptedException {
         login();
 
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("search-block")));
         driver.findElement(By.id("search-block")).click();
+
         driver.findElement(By.name("q")).sendKeys("kiss");
         driver.findElement(By.xpath(".//input[@type='submit']")).click();
 
-        sleep(3000);
         driver.close();
         driver.quit();
     }
@@ -59,12 +61,9 @@ public class Collectomania {
                         (By.xpath(".//div[@class='cnv-widget_popup-box']" +
                                 "/div[@class='cnv-widget_popup-content']")));
 
-        builder.moveToElement(driver.findElement((By.xpath(".//div[@class='cnv-widget_popup-box']" +
+        driver.findElement(By.xpath(".//div[@class='cnv-widget_popup-box']" +
                 "/div[@class='cnv-widget_popup-content']" +
-                "/div[@class='cnv-widget_popup-close']"))))
-                .click()
-                .build()
-                .perform();
+                "/div[@class='cnv-widget_popup-close']")).click();
 
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//form[@id='login_form']" +
@@ -78,6 +77,5 @@ public class Collectomania {
 
         driver.findElement(By.xpath(".//form[@id='login_form']" +
                 "/input[@name='commit']")).click();
-        sleep(3000);
     }
 }
