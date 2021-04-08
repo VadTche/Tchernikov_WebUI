@@ -1,6 +1,6 @@
 package Lesson5Collectomania;
 
-/*
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +46,7 @@ public class Collectomania {
         driver.findElement(By.xpath(
                 ".//a[@href='#fancybox-login' and text()='Личный кабинет']")).click();
 
-        sleep(5000);
+        sleep(10000);
         driver.findElement(By.xpath(".//div[@class='cnv-widget_popup-box']" +
                 "/div[@class='cnv-widget_popup-content']" +
                 "/div[@class='cnv-widget_popup-close']")).click();
@@ -63,4 +63,3 @@ public class Collectomania {
         sleep(3000);
     }
 }
-*/
