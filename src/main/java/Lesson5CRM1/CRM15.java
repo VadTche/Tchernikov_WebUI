@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class CRM1 {
+public class CRM15 {
     private static final String LOGIN_PAGE_URL = "https://crm.geekbrains.space/user/login";
     private static final String STUDENT_LOGIN = "Applanatest";
     private static final String STUDENT_PASSWORD = "Student2020!";
@@ -32,11 +32,11 @@ public class CRM1 {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
+    static Actions builder = new Actions(driver);
+
     public static void main(String[] args) {
         
         login();
-
-        Actions builder = new Actions(driver);
 
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
