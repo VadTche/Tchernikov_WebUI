@@ -1,5 +1,5 @@
 package Lesson5CRM2;
-
+/*
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -93,3 +93,4 @@ public class CRM2 {
         loginButton.click();
     }
 }
+*/
