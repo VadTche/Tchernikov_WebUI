@@ -1,5 +1,6 @@
 package CRM1Test;
 
+import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -64,10 +65,13 @@ public class crm1Test {
                 .until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать проект")));
         driver.findElement(By.linkText("Создать проект")).click();
 
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@class='controls']/input[@type='text']")));
         driver.findElement(By.xpath(".//div[@class='controls']" +
-                "/input[@type='text']")).sendKeys("New York 14");
+                "/input[@type='text']")).sendKeys(firstName);
 
         driver.findElement(By.xpath(".//*[@class='select2-chosen' and text()='Укажите организацию']")).click();
 
