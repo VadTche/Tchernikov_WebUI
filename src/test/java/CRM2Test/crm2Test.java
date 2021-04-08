@@ -1,15 +1,19 @@
 package CRM2Test;
 
-
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +21,7 @@ public class crm2Test {
     private static final String LOGIN_PAGE_URL = "https://crm.geekbrains.space/user/login";
     private static final String STUDENT_LOGIN = "Applanatest";
     private static final String STUDENT_PASSWORD = "Student2020!";
+    private static final Logger logger = LoggerFactory.getLogger(crm2Test.class);
     private static final WebDriver driver;
 
     static {
@@ -32,19 +37,26 @@ public class crm2Test {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
+    static Actions builder = new Actions(driver);
+
+    @BeforeAll
+    static void beforeAllTests() {
+        logger.info("Before all tests");
+    }
+
     @Test
     public void commonWaiterResult () {
         login();
 
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
-        driver.findElement(By.xpath(
-                ".//li[@class='dropdown first']/a[@class='unclickable']" +
-                        "/span[text()='Контрагенты']")).click();
 
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@class='title' and text()='Контактные лица']")));
-        driver.findElement(By.xpath(".//*[@class='title' and text()='Контактные лица']")).click();
+        builder.moveToElement(driver.findElement((By.xpath(".//li[@class='dropdown first']/a[@class='unclickable']" +
+                "/span[text()='Контрагенты']"))))
+                .moveToElement(driver.findElement(By.xpath(".//*[@class='title' and text()='Контактные лица']")))
+                .click()
+                .build()
+                .perform();
 
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать контактное лицо")));
@@ -77,6 +89,8 @@ public class crm2Test {
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.textToBePresentInElementLocated
                         (By.xpath(".//div[@class='flash-messages-holder']"), ("Контактное лицо сохранено")));
+        WebElement flash = driver.findElement(By.xpath(".//div[@class='flash-messages-holder']"));
+        Assertions.assertTrue(flash.isDisplayed());
 
         driver.close();
         driver.quit();

@@ -1,7 +1,6 @@
 package Lesson5CRM1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -88,8 +87,7 @@ public class CRM1 {
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.textToBePresentInElementLocated
                         (By.xpath(".//div[@class='flash-messages-holder']"), ("Проект сохранен")));
-        WebElement flash = driver.findElement(By.xpath(".//div[@class='flash-messages-holder']"));
-        Assertions.assertTrue(flash.isDisplayed());
+        driver.findElement(By.xpath(".//div[@class='flash-messages-holder']"));
 
         driver.close();
         driver.quit();
