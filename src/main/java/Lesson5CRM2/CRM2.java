@@ -2,13 +2,16 @@ package Lesson5CRM2;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class CRM2 {
@@ -30,18 +33,21 @@ public class CRM2 {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
+    static Actions builder = new Actions(driver);
+    static JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+
     public static void main(String[] args) {
         login();
 
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
-        driver.findElement(By.xpath(
-                ".//li[@class='dropdown first']/a[@class='unclickable']" +
-                        "/span[text()='Контрагенты']")).click();
 
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@class='title' and text()='Контактные лица']")));
-        driver.findElement(By.xpath(".//*[@class='title' and text()='Контактные лица']")).click();
+        builder.moveToElement(driver.findElement((By.xpath(".//li[@class='dropdown first']/a[@class='unclickable']" +
+                        "/span[text()='Контрагенты']"))))
+                .moveToElement(driver.findElement(By.xpath(".//*[@class='title' and text()='Контактные лица']")))
+                .click()
+                .build()
+                .perform();
 
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.linkText("Создать контактное лицо")));
@@ -86,9 +92,11 @@ public class CRM2 {
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[id='prependedInput']")));
         driver.findElement(By.cssSelector("input[id='prependedInput']")).sendKeys(STUDENT_LOGIN);
 
-        WebElement passwordTextInput = driver.findElement(By.cssSelector(".span2[name='_password']"));
-        passwordTextInput.sendKeys(STUDENT_PASSWORD);
 
+        ArrayList<WebElement> elements = (ArrayList<WebElement>) jsExecutor
+                .executeScript("return document.getElementsByName('_password')");
+        WebElement passwordTextInput = elements.get(0);
+        passwordTextInput.sendKeys(STUDENT_PASSWORD);
         WebElement loginButton = driver.findElement(By.xpath(".//button[@name='_submit']"));
         loginButton.click();
     }

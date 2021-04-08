@@ -1,7 +1,9 @@
 package Lesson5CRM1;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,13 +12,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class CRM1 {
     private static final String LOGIN_PAGE_URL = "https://crm.geekbrains.space/user/login";
     private static final String STUDENT_LOGIN = "Applanatest";
     private static final String STUDENT_PASSWORD = "Student2020!";
-    private static final WebDriver driver;
+    private static WebDriver driver;
 
     static {
         WebDriverManager.chromedriver().setup();
@@ -33,6 +36,7 @@ public class CRM1 {
     }
 
     static Actions builder = new Actions(driver);
+    static JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
     public static void main(String[] args) {
         
@@ -41,8 +45,7 @@ public class CRM1 {
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
 
-        builder.moveToElement(driver.findElement((By.xpath(
-                ".//li[@class='dropdown']/a[@class='unclickable']" +
+        builder.moveToElement(driver.findElement((By.xpath(".//li[@class='dropdown']/a[@class='unclickable']" +
                         "/span[text()='Проекты']"))))
                 .moveToElement(driver.findElement(By.xpath(".//*[@class='title' and text()='Мои проекты']")))
                 .click()
@@ -56,7 +59,7 @@ public class CRM1 {
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@class='controls']/input[@type='text']")));
         driver.findElement(By.xpath(".//div[@class='controls']" +
-                "/input[@type='text']")).sendKeys("New York 12");
+                "/input[@type='text']")).sendKeys("New York 13");
 
         driver.findElement(By.xpath(".//*[@class='select2-chosen' and text()='Укажите организацию']")).click();
 
@@ -85,6 +88,8 @@ public class CRM1 {
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.textToBePresentInElementLocated
                         (By.xpath(".//div[@class='flash-messages-holder']"), ("Проект сохранен")));
+        WebElement flash = driver.findElement(By.xpath(".//div[@class='flash-messages-holder']"));
+        Assertions.assertTrue(flash.isDisplayed());
 
         driver.close();
         driver.quit();
@@ -98,7 +103,9 @@ public class CRM1 {
                 .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[id='prependedInput']")));
         driver.findElement(By.cssSelector("input[id='prependedInput']")).sendKeys(STUDENT_LOGIN);
 
-        WebElement passwordTextInput = driver.findElement(By.cssSelector(".span2[name='_password']"));
+        ArrayList<WebElement> elements = (ArrayList<WebElement>) jsExecutor
+                .executeScript("return document.getElementsByName('_password')");
+        WebElement passwordTextInput = elements.get(0);
         passwordTextInput.sendKeys(STUDENT_PASSWORD);
 
         WebElement loginButton = driver.findElement(By.xpath(".//button[@name='_submit']"));
