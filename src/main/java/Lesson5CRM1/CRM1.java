@@ -19,7 +19,7 @@ public class CRM1 {
     private static final String LOGIN_PAGE_URL = "https://crm.geekbrains.space/user/login";
     private static final String STUDENT_LOGIN = "Applanatest";
     private static final String STUDENT_PASSWORD = "Student2020!";
-    private static WebDriver driver;
+    private static final WebDriver driver;
 
     static {
         WebDriverManager.chromedriver().setup();
@@ -45,8 +45,8 @@ public class CRM1 {
         new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@id='main-menu']")));
 
-        builder.moveToElement(driver.findElement((By.xpath(".//li[@class='dropdown']/a[@class='unclickable']" +
-                        "/span[text()='Проекты']"))))
+        builder.moveToElement(driver.findElement(By.xpath(".//li[@class='dropdown']/a[@class='unclickable']" +
+                        "/span[text()='Проекты']")))
                 .moveToElement(driver.findElement(By.xpath(".//*[@class='title' and text()='Мои проекты']")))
                 .click()
                 .build()
