@@ -40,15 +40,6 @@ public class Collectomania {
     public static void main(String[] args) throws InterruptedException {
         login();
 
-//        builder.moveToElement(driver.findElement(By.xpath(".//*[@id='content']/div[@class='cont_main_left']/a[@href='/collection/audiotehnika']")))
-//                .moveToElement(driver.findElement(By.xpath(".//a[@class=' first']")))
-//                .click()
-//                .build()
-//                .perform();
-
-        driver.findElement(By.xpath(".//div[@id='wrapper']/div[@id='content']/div[@class='cont_main']/div[@class='cont_main_left']/ul[@class='catalog']/a[@href='/collection/audiotehnika']")).click();
-//        driver.findElement(By.xpath(".//a[@href='/collection/proigrivateli-vinila']")).click();
-
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("search-block")));
         driver.findElement(By.id("search-block")).click();
@@ -68,11 +59,10 @@ public class Collectomania {
         driver.findElement(By.xpath(
                 ".//a[@href='#fancybox-login' and text()='Личный кабинет']")).click();
 
-        new WebDriverWait(driver, 7)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.presenceOfElementLocated
                         (By.xpath(".//div[@class='cnv-widget_popup-box']" +
                                 "/div[@class='cnv-widget_popup-content']")));
-
         driver.findElement(By.xpath(".//div[@class='cnv-widget_popup-box']" +
                 "/div[@class='cnv-widget_popup-content']" +
                 "/div[@class='cnv-widget_popup-close']")).click();
