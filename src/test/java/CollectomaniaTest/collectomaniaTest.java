@@ -1,7 +1,10 @@
-package Lesson5Collectomania;
+package CollectomaniaTest;
+
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class Collectomania {
+public class collectomaniaTest {
 
     private static final String MAIN_PAGE_URL = "https://collectomania.ru";
     private static final String USER_LOGIN = "pismonos@mail.ru";
@@ -38,7 +41,9 @@ public class Collectomania {
     static Actions builder = new Actions(driver);
     static JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-    public static void main(String[] args) throws InterruptedException {
+    @Test
+    public  void checkSearch() throws InterruptedException {
+
         login();
 
         builder.moveToElement(driver.findElement(By.xpath(".//table/tbody/tr/td[1]/ul/li[1]/a[@href='/collection/vinil']")))
@@ -53,7 +58,14 @@ public class Collectomania {
         driver.findElement(By.id("search-block")).click();
 
         driver.findElement(By.name("q")).sendKeys("kiss");
+
         driver.findElement(By.xpath(".//input[@type='submit']")).click();
+
+        new WebDriverWait(driver, 7)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//span[@class='color' and text()='kiss']")));
+        WebElement kiss = driver.findElement(By.xpath(".//span[@class='color' and text()='kiss']"));
+
+        Assertions.assertTrue(kiss.isDisplayed());
 
         driver.close();
         driver.quit();
