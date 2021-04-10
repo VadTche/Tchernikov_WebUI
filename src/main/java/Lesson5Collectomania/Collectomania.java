@@ -31,7 +31,7 @@ public class Collectomania {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     }
 
     static Actions builder = new Actions(driver);
@@ -39,6 +39,13 @@ public class Collectomania {
 
     public static void main(String[] args) throws InterruptedException {
         login();
+
+        builder.moveToElement(driver.findElement(By.xpath(".//table/tbody/tr/td[1]/ul/li[1]/a[@href='/collection/vinil']")))
+                .pause(2000)
+                .moveToElement(driver.findElement(By.xpath(".//table/tbody/tr/td[1]/ul/li[1]/ul/li[3]/a[@href='/collection/ep']")))
+                .click()
+                .build()
+                .perform();
 
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("search-block")));
@@ -53,19 +60,15 @@ public class Collectomania {
     private static void login() throws InterruptedException {
         driver.get(MAIN_PAGE_URL);
 
-        new WebDriverWait(driver, 10)
-                .until(ExpectedConditions.presenceOfElementLocated
-                        (By.xpath(".//a[@href='#fancybox-login' and text()='Личный кабинет']")));
-        driver.findElement(By.xpath(
-                ".//a[@href='#fancybox-login' and text()='Личный кабинет']")).click();
-
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 7)
                 .until(ExpectedConditions.presenceOfElementLocated
                         (By.xpath(".//div[@class='cnv-widget_popup-box']" +
                                 "/div[@class='cnv-widget_popup-content']")));
         driver.findElement(By.xpath(".//div[@class='cnv-widget_popup-box']" +
                 "/div[@class='cnv-widget_popup-content']" +
                 "/div[@class='cnv-widget_popup-close']")).click();
+
+        driver.findElement(By.xpath(".//a[@href='#fancybox-login' and text()='Личный кабинет']")).click();
 
         new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//form[@id='login_form']" +
