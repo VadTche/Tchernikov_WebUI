@@ -2,8 +2,6 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-
-
 /**
  * Unit test for simple App.
  */
