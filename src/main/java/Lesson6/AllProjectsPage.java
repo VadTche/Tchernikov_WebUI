@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AllProjectsPage extends BasePage {
 
-    @FindBy(css = "div[class='pull-left btn-group icons-holder']")
+    @FindBy(linkText = "Создать проект")
     private WebElement createNewProjectButton;
 
     public AllProjectsPage(WebDriver driver) {
@@ -25,7 +25,7 @@ public class AllProjectsPage extends BasePage {
     public AllProjectsPage checkNewProjectPopUp() {
         String message = wait10second.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
                 "div[class='message']"))).getText();
-        assertTrue(message.contains("Заявка на расход сохранена"));
+        assertTrue(message.contains("Проект сохранен"));
         return this;
     }
 

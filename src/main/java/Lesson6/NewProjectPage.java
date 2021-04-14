@@ -1,6 +1,5 @@
 package Lesson6;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,70 +7,99 @@ import org.openqa.selenium.support.ui.Select;
 
 public class NewProjectPage extends BasePage {
 
-    @FindBy(xpath = ".//textarea")
-    private WebElement descriptionTextInput;
+    @FindBy(name = "crm_project[name]")
+    private WebElement projectNameInput;
 
-    @FindBy(name = "crm_expense_request[businessUnit]")
+    @FindBy(xpath = "//*[@class='select2-chosen' and text()='Укажите организацию']")
+    private WebElement clickDropDownMenu_organization;
+
+    @FindBy(xpath = "//div[@class='select2-result-label' and text()='1234']")
+    private WebElement choiceDropDownMenu_organization;
+
+    @FindBy(xpath = "//*[@class='select2-container select2']")
+    private WebElement clickDropDownMenu_ContactPerson;
+
+    @FindBy(css = ".select2-focused")
+    private WebElement sendDropDownMenu_ContactPerson;
+
+    @FindBy(css = ".select2-result-label")
+    private WebElement choiceDropDownMenu_ContactPerson;
+
+    @FindBy(name = "crm_project[businessUnit]")
     private WebElement businessUnitDropDownSelect;
 
-    @FindBy(name = "crm_expense_request[expenditure]")
-    private WebElement expenditureDropDownSelect;
+    @FindBy(name = "crm_project[businessUnit]")
+    private WebElement businessUnitNameInput;
 
-    @FindBy(name = "crm_expense_request[sumPlan]")
-    private WebElement expenseRequestSumTextInput;
+    @FindBy(name = "crm_project[curator]")
+    private WebElement curatorNameInput;
 
-    @FindBy(name = "crm_expense_request[dateChangeNotify]")
-    private WebElement notifyDateHasChanged;
+    @FindBy(name = "crm_project[rp]")
+    private WebElement rpNameInput;
 
-    @FindBy(xpath = ".//div[preceding-sibling::div[child::label[@class='required']]]//input[@class='datepicker-input  hasDatepicker']")
-    private WebElement calendarView;
+    @FindBy(name = "crm_project[manager]")
+    private WebElement managerNameInput;
 
     @FindBy(css = "button[class='btn btn-success action-button']")
-    private WebElement submitButton;
+    private WebElement submitButtonP;
 
     public NewProjectPage(WebDriver driver) {
-
         super(driver);
     }
 
-    public NewProjectPage enterDescription(String description) {
-        descriptionTextInput.sendKeys(description);
+    public NewProjectPage enterProjectName(String description) {
+        projectNameInput.sendKeys(description);
         return this;
     }
-    // TODO: improve input with ENUM
-    public NewProjectPage selectBusinessUnit(int value) {
+
+    public NewProjectPage clickDropDownOrganization() {
+        clickDropDownMenu_organization.click();
+        return this;
+    }
+
+    public NewProjectPage choiceDropDownOrganization() {
+        choiceDropDownMenu_organization.click();
+        return this;
+    }
+
+    public NewProjectPage clickDropDownContactPerson() {
+        clickDropDownMenu_ContactPerson.click();
+        return this;
+    }
+
+    public NewProjectPage sendDropDownContactPerson() {
+        sendDropDownMenu_ContactPerson.sendKeys("Petrova Kate");
+        return this;
+    }
+
+    public NewProjectPage choiceDropDownContactPerson() {
+        choiceDropDownMenu_ContactPerson.click();
+        return this;
+    }
+
+    public NewProjectPage selectBusinessUnit(String description){
         Select businessUnitDropDown = new Select(businessUnitDropDownSelect);
-        businessUnitDropDown.selectByValue(String.valueOf(value));
+        businessUnitDropDown.selectByVisibleText(description);
         return this;
     }
 
-    // TODO: improve input with ENUM
-    public NewProjectPage selectExpenditure(int value) {
-        Select expenditureDropDown = new Select(expenditureDropDownSelect);
-        expenditureDropDown.selectByValue(String.valueOf(value));
+    public NewProjectPage enterCuratorName(String description) {
+        curatorNameInput.sendKeys(description);
         return this;
     }
 
-    public NewProjectPage setExpenseSum(int sum) {
-        expenseRequestSumTextInput.clear();
-        expenseRequestSumTextInput.sendKeys(String.valueOf(sum));
+    public NewProjectPage enterRpName(String description) {
+        rpNameInput.sendKeys(description);
         return this;
     }
 
-    public NewProjectPage clickNotifyDateChangedCheckBox() {
-        notifyDateHasChanged.click();
-        return this;
-    }
-
-    public NewProjectPage selectDateInDatePicker(int day) {
-        calendarView.click();
-        String xpath = String.format(".//a[text()='%d']", day);
-        driver.findElement(By.xpath(xpath)).click();
+    public NewProjectPage enterManagerName(String description) {
+        managerNameInput.sendKeys(description);
         return this;
     }
 
     public AllProjectsPage clickSubmit() {
-        submitButton.click();
+        submitButtonP.click();
         return new AllProjectsPage(driver);
     }
 }

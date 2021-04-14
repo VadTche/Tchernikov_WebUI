@@ -12,10 +12,10 @@ public class ProjectPage extends BasePage{
     WebElement projects = driver.findElement(By.xpath(".//span[@class='title' and text()='Проекты']"));
     WebElement newProject = driver.findElement(By.xpath(".//span[@class='title' and text()='Мои проекты']"));
 
-    public NewProjectPage redirectToNewExpensesPage() {
+    public AllProjectsPage redirectToAllProjectsPage() {
         Action.moveCursorToNavigationTab(projects, driver);
         newProject.click();
-        return new NewProjectPage(driver);
+        return new AllProjectsPage (driver);
     }
 }
 

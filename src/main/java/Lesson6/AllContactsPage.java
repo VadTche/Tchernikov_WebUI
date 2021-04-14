@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AllContactsPage extends BasePage {
 
-    @FindBy(css = "div[class='pull-left btn-group icons-holder']")
+    @FindBy(linkText = "div[class='pull-left btn-group icons-holder']")
     private WebElement createNewContactButton;
 
     public AllContactsPage(WebDriver driver) {
