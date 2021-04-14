@@ -12,9 +12,9 @@ public class ContactPage extends BasePage {
     WebElement contacts = driver.findElement(By.xpath(".//span[@class='title' and text()='Контрагенты']"));
     WebElement newContact = driver.findElement(By.xpath(".//span[@class='title' and text()='Контактные лица']"));
 
-    public NewContactPage redirectToNewContactPage() {
+    public AllContactsPage redirectToAllContactsPage() {
         Action.moveCursorToNavigationTab(contacts, driver);
         newContact.click();
-        return new NewContactPage(driver);
+        return new AllContactsPage (driver);
     }
 }
