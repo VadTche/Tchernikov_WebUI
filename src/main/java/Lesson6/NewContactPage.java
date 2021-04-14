@@ -3,7 +3,6 @@ package Lesson6;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 public class NewContactPage extends BasePage {
 
@@ -20,7 +19,7 @@ public class NewContactPage extends BasePage {
     private WebElement choiceDropDownMenu_organization;
 
     @FindBy(name = "crm_contact[jobTitle]")
-    private WebElement jobTitleDropDownSelect;
+    private WebElement jobTitleDropInput;
 
     @FindBy(css = "button[class='btn btn-success action-button']")
     private WebElement submitButton;
@@ -48,13 +47,12 @@ public class NewContactPage extends BasePage {
         return this;
     }
 
-    public NewContactPage selectJobTitle(String description){
-        Select jobTitleDropDown = new Select(jobTitleDropDownSelect);
-        jobTitleDropDown.selectByVisibleText(description);
+    public NewContactPage enterJobTitle(String description) {
+        jobTitleDropInput.sendKeys(description);
         return this;
     }
 
-    public AllContactsPage clickSubmit(){
+    public AllContactsPage clickSubmit() {
         submitButton.click();
         return new AllContactsPage(driver);
     }

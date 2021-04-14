@@ -43,7 +43,7 @@ public class CRMTest extends BaseTest {
                 .enterFirstName("Робот")
                 .clickDropDownOrganization()
                 .choiceDropDownOrganization()
-                .selectJobTitle("Менеджер")
+                .enterJobTitle("Менеджер")
                 .clickSubmit()
                 .checkNewContactPopUp();
     }
