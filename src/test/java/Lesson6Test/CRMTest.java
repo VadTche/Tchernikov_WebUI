@@ -33,34 +33,6 @@ public class CRMTest extends BaseTest {
                 .checkNewProjectPopUp();
     }
 
-//    @Test
-//    @DisplayName("Создание проекта")
-//    public void createProjectTest() {
-//        Logger logger = Logger.getLogger(AppTest.class);
-//        crmLogin();
-//        logger.info("Вход выполнен успешно");
-//        new CRMHomePage(driver)
-//                .getNavigation()
-//                .moveCursorTooNavigationTab(NavigationBarTabs.PROJECTS)
-//                .clickSubMenuButton(ProjectSubMenuButtons.MY_PROJECTS);
-//        new AllProjectsPage(driver)
-//                .clickNewProject()
-//                .enterProjectName("Kill_star")
-//                .clickCompanyList()
-//                .clickSeceltedCompany()
-//                .selectBusinessUnit(1)
-//                .selectCurator(33)
-//                .selectRP(83)
-//                .selectManager(6)
-//                .selectContsctMain(189)
-//                .clickSubmit()
-//                .checkNewProject();
-//        logger.info("Проект сохранен успешно");
-//        crmLogout();
-//        logger.info("Вход выполнен успешно");
-//        driver.close();
-//    }
-
     @Test
     public void newContactTest() {
         new LoginPage(driver)
