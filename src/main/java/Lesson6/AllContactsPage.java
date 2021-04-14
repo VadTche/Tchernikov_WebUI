@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AllContactsPage extends BasePage {
 
-    @FindBy(linkText = "div[class='pull-left btn-group icons-holder']")
+    @FindBy(linkText = "Создать контактное лицо")
     private WebElement createNewContactButton;
 
     public AllContactsPage(WebDriver driver) {
@@ -25,7 +25,7 @@ public class AllContactsPage extends BasePage {
     public AllContactsPage checkNewContactPopUp() {
         String message = wait10second.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
                 "div[class='message']"))).getText();
-        assertTrue(message.contains("Заявка на расход сохранена"));
+        assertTrue(message.contains("Контактное лицо сохранено"));
         return this;
     }
 }

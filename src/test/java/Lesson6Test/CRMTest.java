@@ -10,7 +10,7 @@ import static Lesson6Test.Configuration.STUDENT_PASSWORD;
 public class CRMTest extends BaseTest {
 
     @Test
-    public void newProjectTest() throws InterruptedException {
+    public void newProjectTest() {
 
         Faker faker = new Faker();
         String firstName = faker.name().firstName();
@@ -37,15 +37,13 @@ public class CRMTest extends BaseTest {
     public void newContactTest() {
         new LoginPage(driver)
                 .loginContact(STUDENT_LOGIN, STUDENT_PASSWORD)
-                .redirectToNewContactPage()
-                .clickSubmit()
+                .redirectToAllContactsPage()
                 .clickOnCreateNewContactButton()
-                .enterDescription("test 1234")
-                .selectBusinessUnit(1)
-                .selectExpenditure(87)
-                .setExpenseSum(10000)
-                .clickNotifyDateChangedCheckBox()
-                .selectDateInDatePicker(20)
+                .enterLastName("Роботов")
+                .enterFirstName("Робот")
+                .clickDropDownOrganization()
+                .choiceDropDownOrganization()
+                .selectJobTitle("Менеджер")
                 .clickSubmit()
                 .checkNewContactPopUp();
     }

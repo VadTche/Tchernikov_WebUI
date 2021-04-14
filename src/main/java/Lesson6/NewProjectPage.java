@@ -28,9 +28,6 @@ public class NewProjectPage extends BasePage {
     @FindBy(name = "crm_project[businessUnit]")
     private WebElement businessUnitDropDownSelect;
 
-    @FindBy(name = "crm_project[businessUnit]")
-    private WebElement businessUnitNameInput;
-
     @FindBy(name = "crm_project[curator]")
     private WebElement curatorNameInput;
 
