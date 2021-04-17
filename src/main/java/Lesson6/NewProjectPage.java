@@ -1,5 +1,6 @@
 package Lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,57 +45,68 @@ public class NewProjectPage extends BasePage {
         super(driver);
     }
 
+    @Step("enter project name")
     public NewProjectPage enterProjectName(String description) {
         projectNameInput.sendKeys(description);
         return this;
     }
 
+    @Step("click on drop-down menu organization")
     public NewProjectPage clickDropDownOrganization() {
         clickDropDownMenu_organization.click();
         return this;
     }
 
+    @Step("check in drop-down menu organization")
     public NewProjectPage choiceDropDownOrganization() {
         choiceDropDownMenu_organization.click();
         return this;
     }
 
+    @Step("click on drop-down menu contacts")
     public NewProjectPage clickDropDownContactPerson() {
         clickDropDownMenu_ContactPerson.click();
         return this;
     }
 
+    @Step("send name in drop-down menu contacts")
     public NewProjectPage sendDropDownContactPerson() {
         sendDropDownMenu_ContactPerson.sendKeys("Petrova Kate");
         return this;
     }
 
+    @Step("choice name in drop-down menu contacts")
     public NewProjectPage choiceDropDownContactPerson() {
         choiceDropDownMenu_ContactPerson.click();
         return this;
     }
 
+    @Step("select business unit")
     public NewProjectPage selectBusinessUnit(String description){
         Select businessUnitDropDown = new Select(businessUnitDropDownSelect);
         businessUnitDropDown.selectByVisibleText(description);
         return this;
     }
 
+    @Step("enter curator name")
     public NewProjectPage enterCuratorName(String description) {
         curatorNameInput.sendKeys(description);
         return this;
     }
 
+    @Step("enter rp name")
     public NewProjectPage enterRpName(String description) {
         rpNameInput.sendKeys(description);
         return this;
     }
 
+    @Step("enter manager name")
     public NewProjectPage enterManagerName(String description) {
         managerNameInput.sendKeys(description);
         return this;
     }
 
+    @Step("click 'submit'")
     public AllProjectsPage clickSubmit() {
         submitButtonP.click();
         return new AllProjectsPage(driver);

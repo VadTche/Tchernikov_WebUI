@@ -1,5 +1,6 @@
 package Lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -28,30 +29,37 @@ public class NewContactPage extends BasePage {
         super(driver);
     }
 
+    @Step("enter contact last name")
     public  NewContactPage enterLastName(String description){
         contactLastName.sendKeys(description);
         return this;
     }
+
+    @Step("enter contact first name")
     public  NewContactPage enterFirstName(String description){
         contactFirstName.sendKeys(description);
         return this;
     }
 
+    @Step("click on drop-down menu organization")
     public NewContactPage clickDropDownOrganization() {
         clickDropDownMenu_organization.click();
         return this;
     }
 
+    @Step("choice in drop-down menu organization")
     public NewContactPage choiceDropDownOrganization() {
         choiceDropDownMenu_organization.click();
         return this;
     }
 
+    @Step("enter job title")
     public NewContactPage enterJobTitle(String description) {
         jobTitleDropInput.sendKeys(description);
         return this;
     }
 
+    @Step("click 'submit'")
     public AllContactsPage clickSubmit() {
         submitButton.click();
         return new AllContactsPage(driver);
