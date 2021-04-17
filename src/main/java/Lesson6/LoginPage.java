@@ -21,7 +21,7 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
-    @Step("auth project")
+    @Step("authorise project")
     public ProjectPage loginProject(String login, String password) {
         inputLogin.sendKeys(login);
         inputPassword.sendKeys(password);
@@ -29,7 +29,7 @@ public class LoginPage extends BasePage{
         return new ProjectPage(driver);
     }
 
-    @Step("auth contact")
+    @Step("authorise contact")
     public ContactPage loginContact(String login, String password) {
         inputLogin.sendKeys(login);
         inputPassword.sendKeys(password);

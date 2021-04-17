@@ -1,5 +1,6 @@
 package Lesson6Test;
 
+import Lesson7.CustomLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -8,11 +9,12 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import ru.geekbrains.webui.listener.CustomLogger;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import static Lesson6Test.Configuration.BASE_URL;
 import static Lesson6Test.Configuration.LOGIN_PATH;
@@ -39,7 +41,7 @@ public abstract class BaseTest {
         chromeDriver.setLogLevel(Level.INFO);
 
         // Обертка драйвера в EventFiringWebDriver, умеющего регистрировать кастомные листнеры
-        driver = new EventFiringWebDriver(chromeDriver);
+        EventFiringWebDriver driver = new EventFiringWebDriver(new ChromeDriver());
         driver.register(new CustomLogger());
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(BASE_URL + LOGIN_PATH);
