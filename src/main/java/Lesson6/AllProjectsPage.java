@@ -1,5 +1,6 @@
 package Lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,16 +18,16 @@ public class AllProjectsPage extends BasePage {
         super(driver);
     }
 
+    @Step("click 'new project'")
     public NewProjectPage clickOnCreateNewProjectButton() {
         createNewProjectButton.click();
         return new NewProjectPage(driver);
     }
 
-    public AllProjectsPage checkNewProjectPopUp() {
+    @Step("Check 'new project' popup visibility")
+    public void checkNewProjectPopUp() {
         String message = wait10second.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
                 "div[class='message']"))).getText();
         assertTrue(message.contains("Проект сохранен"));
-        return this;
     }
-
 }

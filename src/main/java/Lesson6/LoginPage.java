@@ -1,6 +1,7 @@
 package Lesson6;
 
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
+    @Step("authorise project")
     public ProjectPage loginProject(String login, String password) {
         inputLogin.sendKeys(login);
         inputPassword.sendKeys(password);
@@ -27,6 +29,7 @@ public class LoginPage extends BasePage{
         return new ProjectPage(driver);
     }
 
+    @Step("authorise contact")
     public ContactPage loginContact(String login, String password) {
         inputLogin.sendKeys(login);
         inputPassword.sendKeys(password);

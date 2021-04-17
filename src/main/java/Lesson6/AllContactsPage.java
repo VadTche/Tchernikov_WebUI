@@ -1,5 +1,6 @@
 package Lesson6;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,15 +18,16 @@ public class AllContactsPage extends BasePage {
         super(driver);
     }
 
+    @Step("click 'new contact'")
     public NewContactPage clickOnCreateNewContactButton() {
         createNewContactButton.click();
         return new NewContactPage(driver);
     }
 
-    public AllContactsPage checkNewContactPopUp() {
+    @Step("Check 'new contact' popup visibility")
+    public void checkNewContactPopUp() {
         String message = wait10second.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
                 "div[class='message']"))).getText();
         assertTrue(message.contains("Контактное лицо сохранено"));
-        return this;
     }
 }
